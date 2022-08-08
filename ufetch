@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# ufetch- tiny system information tool written in bash
+
+## INFO
+host="$(hostname)@${USER}"
+os="$(lsb_release -sd)"
+uptime="$(uptime -p)"
+shell="$(basename ${SHELL})"
+cpu=$(awk -F ":" 'NR==5 {print $2}' /proc/cpuinfo)
+gpu=$(lspci 2>/dev/null | awk -F ":" '/VGA/ {print $3}')
+mem=$(awk '/MemTotal/ {print $2/1024}' /proc/meminfo)
+
+## FUNCTIONS
+function separator() {
+    size=$1
+    separator=$(printf "%${size}s");
+    echo ${separator// /-}
+}
+
+## PRINT
+echo $host
+separator ${#host}
+
+echo OS: $os
+echo UPTIME: $uptime
+echo SHELL: $shell
+echo CPU: $cpu
+echo GPU: $gpu
+echo RAM: $mem
