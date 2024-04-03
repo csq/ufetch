@@ -30,15 +30,28 @@ function separator() {
 }
 
 ## PRINT
+max_length=$(($(echo -n 'UPTIME' | wc -c) + 1))
+
 echo -e ${c0}$host${RCol}
 separator ${#host}
 
-echo -e ${c1}OS:${RCol} $os
-echo -e ${c2}UPTIME:${RCol} $uptime
-echo -e ${c3}SHELL:${RCol} $shell
-echo -e ${c4}CPU:${RCol} $cpu
-echo -e ${c0}GPU:${RCol} $gpu
-echo -e ${c6}RAM:${RCol} $mem $unit
+printf ${c1}"%-${max_length}s" 'OS'
+echo -e ${RCol} $os
+
+printf ${c2}"%-${max_length}s" 'UPTIME'
+echo -e ${RCol} $uptime
+
+printf ${c3}"%-${max_length}s" 'SHELL'
+echo -e ${RCol} $shell
+
+printf ${c4}"%-${max_length}s" 'CPU'
+echo -e ${RCol} $cpu
+
+printf ${c0}"%-${max_length}s" 'GPU'
+echo -e ${RCol} $gpu
+
+printf ${c6}"%-${max_length}s" 'RAM'
+echo -e ${RCol} $mem $unit
 echo -e
 echo -e ${c0}███${RCol}${c1}███${RCol}${c2}███${RCol}${c3}███${Rcol}${c4}███${RCol}${c5}███${RCol}${c6}███${RCol}███${RCol}
 echo -e
